@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.finmene"
+    namespace = "com.finmene.capstone.id"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
