@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "286816299121",
+    "project_id": "finmene-project",
+    "storage_bucket": "finmene-project.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286816299121:android:beea9f3dd95c5c79a313d0",
+        "android_client_info": {
+          "package_name": "com.example.finmene"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnJPx4yN4q_Cikd6F9-pTjdF6gSQ0pSgs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286816299121:android:01757ecb308d8115a313d0",
+        "android_client_info": {
+          "package_name": "com.finmene.capstone.id"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnJPx4yN4q_Cikd6F9-pTjdF6gSQ0pSgs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
