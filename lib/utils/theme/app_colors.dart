@@ -37,4 +37,18 @@ class AppColors {
   static const Color backgroundDark = Color(0xFF1E1F1D);
   static const Color onPrimaryTextDark = Color(0xFFEDECE9);
 
+  // Other Colors
+  static const Color blueBrand = Colors.blue;
+  static const Color whiteMassive = Color.fromRGBO(255, 255, 255, 1);
+  static const Color whiteHeavy = Color.fromRGBO(246, 246, 246, 1);
+  static const Color whiteFair = Color.fromRGBO(224, 224, 224, 1);
+  static const Color whiteSoft = Color.fromRGBO(200, 200, 200, 1);
+  static const Color whiteRoot = Color.fromRGBO(173, 173, 173, 1);
+
+  static const Color blackMassive = Color.fromRGBO(38, 38, 38, 1);
+  static const Color blackHeavy = Color.fromRGBO(38, 38, 38, 1);
+  static const Color blackFair = Color.fromRGBO(51, 51, 51, 1);
+  static const Color blackSoft = Color.fromRGBO(93, 93, 93, 1);
+  static const Color blackRoot = Color.fromRGBO(209, 209, 209, 1);
+
 }

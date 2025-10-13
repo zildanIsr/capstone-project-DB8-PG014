@@ -55,6 +55,7 @@ class AppTheme {
 
   static ThemeData get lightTheme {
     return ThemeData(
+      scaffoldBackgroundColor: AppColors.backgroundLight,
       colorScheme: ColorScheme.light(
         primary: AppColors.primary,
         secondary: AppColors.secondary,
@@ -66,11 +67,29 @@ class AppTheme {
       textTheme: _textLightTheme,
       useMaterial3: true,
       appBarTheme: _appBarTheme,
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+      dialogTheme: DialogThemeData(
+        backgroundColor: AppColors.backgroundLight
+      ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: AppColors.whiteMassive,
+        selectedIconTheme: IconThemeData(
+          color: AppColors.primary,
+        ),
+        unselectedIconTheme: IconThemeData(
+          color: AppColors.blackRoot
+        ),
+        type: BottomNavigationBarType.fixed,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+      ),
     );
   }
 
   static ThemeData get darkTheme {
     return ThemeData(
+      scaffoldBackgroundColor: AppColors.backgroundDark,
       colorScheme: ColorScheme.dark(
         primary: AppColors.primary,
         secondary: AppColors.secondary,
@@ -82,6 +101,24 @@ class AppTheme {
       textTheme: _textDarkTheme,
       useMaterial3: true,
       appBarTheme: _appBarTheme,
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+      dialogTheme: DialogThemeData(
+        backgroundColor: AppColors.backgroundDark
+      ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: AppColors.blackMassive,
+        elevation: 100,
+        selectedIconTheme: IconThemeData(
+          color: AppColors.secondary,
+        ),
+        unselectedIconTheme: IconThemeData(
+          color: AppColors.whiteFair
+        ),
+        type: BottomNavigationBarType.fixed,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+      ),
     );
   }
 }
