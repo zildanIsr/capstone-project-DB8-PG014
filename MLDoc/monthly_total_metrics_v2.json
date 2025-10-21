@@ -1,0 +1,30 @@
+{
+  "valid": {
+    "MAE": 3922.144603139668,
+    "rMAE%": 18.078730675218573,
+    "SMAPE%": 18.612464211277096
+  },
+  "test": {
+    "MAE": 3928.2719409374267,
+    "rMAE%": 19.504545396082072,
+    "SMAPE%": 20.536766228114168
+  },
+  "blend_weights_flex": {
+    "hgb": 0.6,
+    "sn": 0.1,
+    "ets": 0.1,
+    "theta": 0.20000000000000007
+  },
+  "hgb_params_flex": {
+    "max_depth": 3,
+    "learning_rate": 0.03,
+    "max_iter": 800
+  },
+  "fixed_cats": [
+    "Rent",
+    "Utilities"
+  ],
+  "calibration_scale": 1.1850835492378142,
+  "freq": "MS",
+  "seasonal_period": 12
+}
