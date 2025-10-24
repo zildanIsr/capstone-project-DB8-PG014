@@ -1,20 +1,10 @@
 {
-  "kpi": {
-    "valid_rmae3m": 13.86,
-    "test_rmae3m": 17.42
-  },
-  "mae": {
-    "valid": 4105.998585027798,
-    "test": 5298.16907224662
-  },
-  "safety_buffer": 0.15,
-  "next_month_budget_weekly": 3511.231430348924,
-  "next_month_budget_weekly_formatted": "Rp3.511",
-  "next_month_budget_monthly": 15098.295150500371,
-  "next_month_budget_monthly_formatted": "Rp15.098",
+  "safety_buffer": 0.1,
+  "next_month_budget_weekly": 4806.182500310849,
+  "next_month_budget_monthly": 20666.58475133665,
+  "next_month_budget_weekly_formatted": "Rp4.806",
+  "next_month_budget_monthly_formatted": "Rp20.667",
   "recommendations": [
-    "Kurangi Shopping/Ent sekitar Rp5.000 /bulan (~Rp1.250/minggu).",
-    "Kurangi belanja 'with' sekitar Rp5.000 /bulan (~Rp1.250/minggu).",
-    "Kurangi belanja 'special' sekitar Rp5.000 /bulan (~Rp1.250/minggu)."
+    "Kurangi expense sekitar Rp5.000/bulan (~Rp1.163/minggu)."
   ]
 }
