@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'dart:developer';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefService {
@@ -9,7 +10,7 @@ class SharedPrefService {
     try {
       await prefs.setString(key, value);
     } catch (e) {
-      debugPrint(e.toString());
+      log(e.toString());
     }
   }
 
@@ -18,7 +19,7 @@ class SharedPrefService {
     try {
       await prefs.setBool(key, value);
     } catch (e) {
-      debugPrint(e.toString());
+      log(e.toString());
     }
   }
 
@@ -27,7 +28,7 @@ class SharedPrefService {
     try {
       await prefs.setInt(key, value);
     } catch (e) {
-      debugPrint(e.toString());
+      log(e.toString());
     }
   }
 
@@ -36,7 +37,7 @@ class SharedPrefService {
     try {
       await prefs.setDouble(key, value);
     } catch (e) {
-      debugPrint(e.toString());
+      log(e.toString());
     }
   }
 
@@ -46,7 +47,7 @@ class SharedPrefService {
       String? val = prefs.getString(key);
       return val ?? "";
     } catch (e) {
-      debugPrint(e.toString());
+      log(e.toString());
       return "";
     }
   }
@@ -57,7 +58,7 @@ class SharedPrefService {
       bool? val = prefs.getBool(key);
       return val ?? false;
     } catch (e) {
-      debugPrint(e.toString());
+      log(e.toString());
     }
     return false;
   }
@@ -68,7 +69,7 @@ class SharedPrefService {
       int? val = prefs.getInt(key);
       return val;
     } catch (e) {
-      debugPrint(e.toString());
+      log(e.toString());
     }
     return null;
   }
@@ -78,7 +79,7 @@ class SharedPrefService {
     try {
       return prefs.getDouble(key);
     } catch (e) {
-      debugPrint(e.toString());
+      log(e.toString());
     }
     return null;
   }

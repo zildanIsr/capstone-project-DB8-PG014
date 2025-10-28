@@ -1,4 +1,3 @@
-
 import 'package:finmene/providers/main/main_provider.dart';
 import 'package:finmene/utils/res/string_res.dart';
 import 'package:finmene/utils/router/routes_name.dart';
@@ -59,26 +58,37 @@ class _MainScreenState extends State<MainScreen> {
           },
           child: Scaffold(
             extendBody: true,
-            body: IndexedStack(index: controller.currentIndex, children: controller.screens),
-            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+            body: IndexedStack(
+              index: controller.currentIndex,
+              children: controller.screens,
+            ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
             floatingActionButton: FloatingActionButton(
               elevation: 0,
               shape: const CircleBorder(),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, RoutesName.addUpdateRecord);
+              },
               child: Icon(Icons.add),
             ),
-            bottomNavigationBar: BottomAppBar(
-              notchMargin: 5,
-              height: 60,
-              elevation: 10,
-              padding: EdgeInsets.zero,
-              shape: const CircularNotchedRectangle(),
+            bottomNavigationBar: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(24),
+                topRight: Radius.circular(24),
+              ),
               child: BottomNavigationBar(
                 currentIndex: controller.currentIndex,
                 onTap: controller.changeIndex,
                 items: [
-                  BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
-                  BottomNavigationBarItem(icon: Icon(Icons.person_2), label: 'Profile'),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.home_filled),
+                    label: 'Home',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.person_2),
+                    label: 'Profile',
+                  ),
                 ],
               ),
             ),

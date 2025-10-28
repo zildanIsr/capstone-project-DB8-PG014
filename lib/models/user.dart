@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 
-class UserModel extends Equatable {
+class UserLocal extends Equatable {
   final String uuid, name, email;
   final String? photoUrl;
   
-  const UserModel({
+  const UserLocal({
     required this.uuid,
     required this.name,
     required this.email,
@@ -12,6 +12,6 @@ class UserModel extends Equatable {
   });
   
   @override
-  List<Object?> get props => [email];
+  List<Object?> get props => [uuid, email];
   
 }

@@ -1,0 +1,4 @@
+enum TypeOfRecord {
+  expense,
+  income
+}

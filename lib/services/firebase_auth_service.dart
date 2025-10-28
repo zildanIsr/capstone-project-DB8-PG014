@@ -12,6 +12,7 @@ class FirebaseAuthService {
         email: email,
         password: password,
       );
+
       return result;
     } on FirebaseAuthException catch (e) {
       final errorMessage = switch (e.code) {

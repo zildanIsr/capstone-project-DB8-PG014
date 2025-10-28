@@ -9,10 +9,10 @@ class FirabaseAuthProvider extends ChangeNotifier {
   FirabaseAuthProvider(this._service);
 
   String? _message;
-  UserModel? _profile;
+  UserLocal? _profile;
   FirebaseAuthStatus _authStatus = FirebaseAuthStatus.unauthenticated;
 
-  UserModel? get profile => _profile;
+  UserLocal? get profile => _profile;
   String? get message => _message;
   FirebaseAuthStatus get authStatus => _authStatus;
 
@@ -39,7 +39,7 @@ class FirabaseAuthProvider extends ChangeNotifier {
 
       final result = await _service.signInUser(email, password);
 
-      _profile = UserModel(
+      _profile = UserLocal(
         uuid: result.user?.uid ?? "",
         name: result.user?.displayName ?? email.split('@').first,
         email: result.user?.email ?? email,
@@ -73,7 +73,7 @@ class FirabaseAuthProvider extends ChangeNotifier {
 
   Future updateProfile() async {
     final user = await _service.userChanges();
-    _profile = UserModel(
+    _profile = UserLocal(
       uuid: user?.uid ?? _profile!.uuid,
       name: user?.displayName ?? _profile!.name,
       email: user?.email ?? _profile!.email,

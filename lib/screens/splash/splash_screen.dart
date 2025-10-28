@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(Duration(seconds: 3), () {
-        if (mounted) Navigator.pushReplacementNamed(context, RoutesName.authRoute);
+        if (mounted) Navigator.pushReplacementNamed(context, RoutesName.mainRoute);
       });
     });
     super.initState();
@@ -46,6 +46,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Widget appInformation(BuildContext context) {
     AppInfoProvider appInfo = Provider.of<AppInfoProvider>(context);
-    return Center(child: Text("v${appInfo.version}", style: Theme.of(context).textTheme.labelLarge,));
+    return Center(child: Text("v ${appInfo.version}", style: Theme.of(context).textTheme.labelLarge,));
   }
 }

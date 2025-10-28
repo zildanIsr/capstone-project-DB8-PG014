@@ -8,7 +8,13 @@ class StringRes {
   static const String greeting = "Hello";
   static const String wellcomeo = "Selamat Datang di";
   static const String applicationName = "Finmene";
-  static const String appIntroduction = "Aplikasi management pengeluaran kmu";
+  static const String appIntroduction = "Aplikasi manajemen pengeluaran kamu";
   static const String forgotPasswordText = "Lupa password";
   static const String loginButton = "Login";
+  static const String registerButton = "Register";
+  static const String moreButton = "Lainnya";
+  static const String lastRecordTitle = "Catatan Terakhir";
+  static const String addButton = "Tambah Catatan";
+
+  static const String defaultErrorMessage = "Terjadi Kesalahan,\nSilahkan coba kembali";
 }

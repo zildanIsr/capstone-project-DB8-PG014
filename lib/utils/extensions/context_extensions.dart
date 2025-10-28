@@ -1,4 +1,7 @@
+import 'package:finmene/models/user.dart';
+import 'package:finmene/providers/user/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 extension ContextExt on BuildContext {
   ThemeData get theme => Theme.of(this);
@@ -11,6 +14,10 @@ extension ContextExt on BuildContext {
 
   double get widht => size.width;
   double get height => size.height;
+
+  UserProvider get userProvider => read<UserProvider>();
+
+  UserLocal? get currentUser => userProvider.user;
 
   // TabNavigator get tabNavigator => read<TabNavigator>();
 

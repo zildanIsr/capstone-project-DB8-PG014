@@ -1,7 +1,9 @@
+import 'package:finmene/providers/theme_provider.dart';
 import 'package:finmene/utils/extensions/context_extensions.dart';
 import 'package:finmene/utils/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class RegularTextFormField extends StatefulWidget {
   const RegularTextFormField({
@@ -35,7 +37,6 @@ class RegularTextFormField extends StatefulWidget {
     this.textAlign = TextAlign.start,
     this.contentPadding,
     this.customTextStyle,
-    this.isChangeOnInput = true,
     this.hintText,
     this.hintStyle,
     this.prefixIconConstraints,
@@ -75,7 +76,6 @@ class RegularTextFormField extends StatefulWidget {
   final TextAlign textAlign;
   final EdgeInsetsGeometry? contentPadding;
   final TextStyle? customTextStyle;
-  final bool isChangeOnInput;
   final String? hintText;
   final TextStyle? hintStyle;
   final BoxConstraints? prefixIconConstraints;
@@ -96,8 +96,6 @@ class _RegularTextFormFieldState extends State<RegularTextFormField> {
   bool _isInvalidValue = false;
   late final FocusNode _textFieldFocus;
   bool _isEmpty = true;
-
-  //Color _bgColor = Colors.white;
 
   @override
   void initState() {
@@ -125,6 +123,7 @@ class _RegularTextFormFieldState extends State<RegularTextFormField> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context, );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -145,7 +144,7 @@ class _RegularTextFormFieldState extends State<RegularTextFormField> {
             hintStyle:
                 widget.hintStyle ??
                 context.textTheme.labelMedium!.copyWith(
-                  color: AppColors.whiteFair,
+                  color: themeProvider.themeMode == ThemeMode.light ? AppColors.whiteFair : AppColors.blackFair,
                 ),
             contentPadding: widget.contentPadding,
             labelText: widget.label,
@@ -153,21 +152,19 @@ class _RegularTextFormFieldState extends State<RegularTextFormField> {
                 ? context.textTheme.bodyMedium!.copyWith(
                     color: AppColors.errorFair,
                   )
-                : context.textTheme.bodyMedium!.copyWith(
-                    color: AppColors.blackSoft,
-                  ),
+                : context.textTheme.bodyMedium!,
             floatingLabelBehavior: FloatingLabelBehavior.auto,
             floatingLabelAlignment: FloatingLabelAlignment.start,
             floatingLabelStyle: context.textTheme.labelMedium!.copyWith(
               color: _isInvalidValue && widget.showErrorText
                   ? AppColors.errorFair
-                  : AppColors.blackSoft,
+                  : null,
             ),
             border: widget.useBorder
                 ? UnderlineInputBorder(
                     borderSide: BorderSide(
                       color: _isEmpty
-                          ? AppColors.whiteSoft
+                          ? themeProvider.themeMode == ThemeMode.light ? AppColors.blackSoft : AppColors.whiteSoft
                           : widget.borderValidColor ?? AppColors.primary,
                       width: 1,
                     ),
@@ -177,7 +174,7 @@ class _RegularTextFormFieldState extends State<RegularTextFormField> {
                 ? UnderlineInputBorder(
                     borderSide: BorderSide(
                       color: _isEmpty
-                          ? AppColors.whiteSoft
+                          ? themeProvider.themeMode == ThemeMode.light ? AppColors.blackSoft : AppColors.whiteSoft
                           : widget.borderValidColor ?? AppColors.primary,
                       width: 1,
                     ),
@@ -192,33 +189,28 @@ class _RegularTextFormFieldState extends State<RegularTextFormField> {
                   )
                 : InputBorder.none,
             focusedErrorBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: AppColors.errorFair, width: 1),
+              borderSide: BorderSide(color: AppColors.errorFair, width: 2),
             ),
             errorBorder: const UnderlineInputBorder(
-              borderSide: BorderSide(color: AppColors.errorFair, width: 1),
+              borderSide: BorderSide(color: AppColors.errorFair, width: 2),
             ),
             errorStyle: const TextStyle(
               height: 0.01,
               color: Colors.transparent,
               fontSize: 0,
             ),
-            focusColor: AppColors.whiteHeavy,
-            hoverColor: AppColors.whiteHeavy,
+            focusColor: themeProvider.themeMode == ThemeMode.light ? AppColors.whiteHeavy : AppColors.blackHeavy,
+            hoverColor: themeProvider.themeMode == ThemeMode.light ? AppColors.whiteHeavy : AppColors.blackHeavy,
             filled: true,
-            fillColor: _isEmpty
-                ? AppColors.whiteMassive
-                : widget.isChangeOnInput
-                ? AppColors.whiteHeavy
-                : AppColors.whiteMassive,
+            fillColor: Theme.of(context).colorScheme.surface,
             suffixIcon:
                 widget.suffixIcon ??
                 (widget.showClearIcon && !_isEmpty
                     ? IconButton(
                         padding: EdgeInsets.zero,
                         iconSize: 16,
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.cancel,
-                          color: AppColors.blackFair,
                           size: 16,
                         ),
                         onPressed: () => {
@@ -254,9 +246,7 @@ class _RegularTextFormFieldState extends State<RegularTextFormField> {
           readOnly: widget.readOnly,
           style:
               widget.customTextStyle ??
-              context.textTheme.bodyMedium!.copyWith(
-                color: AppColors.blackFair,
-              ),
+              context.textTheme.bodyMedium,
           cursorErrorColor: AppColors.blackFair,
           validator: (value) {
             final validation = widget.validator?.call(_value);

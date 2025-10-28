@@ -15,6 +15,7 @@ class AppInfoProvider extends ChangeNotifier {
     _packageName = packageInfo.packageName;
     _version = packageInfo.version;
     _buildNumber = packageInfo.buildNumber;
+    notifyListeners();
   }
 
 }

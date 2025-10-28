@@ -1,5 +1,6 @@
 import 'package:finmene/utils/theme/app_colors.dart';
 import 'package:finmene/utils/theme/app_text_style.dart';
+import 'package:finmene/utils/theme/card_theme.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
@@ -61,7 +62,7 @@ class AppTheme {
         secondary: AppColors.secondary,
         tertiary: AppColors.tertiary,
         error: AppColors.errorFair,
-        surface: AppColors.backgroundLight,
+        surface: AppColors.whiteFair,
       ),
       brightness: Brightness.light,
       textTheme: _textLightTheme,
@@ -69,6 +70,7 @@ class AppTheme {
       appBarTheme: _appBarTheme,
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       visualDensity: VisualDensity.adaptivePlatformDensity,
+      cardTheme: CardThemeCustom.cardThemeLight,
       dialogTheme: DialogThemeData(
         backgroundColor: AppColors.backgroundLight
       ),
@@ -83,6 +85,7 @@ class AppTheme {
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: true,
         showUnselectedLabels: true,
+        elevation: 100,
       ),
     );
   }
@@ -95,8 +98,9 @@ class AppTheme {
         secondary: AppColors.secondary,
         tertiary: AppColors.tertiary,
         error: AppColors.errorFair,
-        surface: AppColors.backgroundLight,
+        surface: AppColors.blackFair,
       ),
+      cardTheme: CardThemeCustom.cardThemeDark,
       brightness: Brightness.dark,
       textTheme: _textDarkTheme,
       useMaterial3: true,
