@@ -31,7 +31,20 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        ndk {
+            abiFilters += listOf("armeabi-v7a", "arm64-v8a")
+        }
     }
+
+    // packaging {
+    //     jniLibs {
+    //         useLegacyPackaging = true
+    //     }
+    //     resources {
+    //         pickFirsts.add("**/libtensorflowlite_jni.so")
+    //         pickFirsts.add("**/libtensorflowlite_flex_jni.so")
+    //     }
+    // }
 
     buildTypes {
         release {
@@ -45,3 +58,12 @@ android {
 flutter {
     source = "../.."
 }
+
+dependencies {
+    // implementation("org.tensorflow:tensorflow-lite:2.14.0")
+    // implementation("org.tensorflow:tensorflow-lite-select-tf-ops:2.14.0")
+}
+
+// configurations.all {
+//     exclude(group = "com.google.ai.edge.litert")
+// }

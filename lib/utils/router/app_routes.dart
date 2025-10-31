@@ -1,11 +1,15 @@
 import 'package:finmene/models/user.dart';
 import 'package:finmene/providers/auth/firabase_auth_provider.dart';
+import 'package:finmene/providers/bookkeeping/bookkeeping_provider.dart';
+import 'package:finmene/providers/ml/monthly_budget_provider.dart';
 import 'package:finmene/providers/user/user_provider.dart';
 import 'package:finmene/screens/auth/auth_screen.dart';
 import 'package:finmene/screens/auth/sign_up_screen.dart';
 import 'package:finmene/screens/financial-record/add_update_record.dart';
+import 'package:finmene/screens/financial-record/list_all_record.dart';
 import 'package:finmene/screens/main_screen.dart';
 import 'package:finmene/screens/splash/splash_screen.dart';
+import 'package:finmene/services/ml_model_service.dart';
 import 'package:finmene/utils/router/routes_name.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +26,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           final localUser = UserLocal(
             uuid: user!.uid,
             email: user.email ?? '',
-            name: user.displayName == null 
+            name: user.displayName == null || user.displayName!.isEmpty
                 ? user.email!.split('@').first
                 : user.displayName!,
           );
@@ -49,6 +53,20 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           builder: (_, __) => SignUpScreen(),
         );
       }, settings: settings);
+    case RoutesName.listAllRecords:
+      return _pageBuilder((_) {
+        return ChangeNotifierProvider(
+          create: (context) {
+            final model =  MonthlyBudgetProvider(
+              service: context.read<MonthlyBudgetModel>(),
+              budgetProvider: context.read<BookkeepingProvider>(),
+            );
+            model.init();
+            return model;
+          },
+          builder: (_, __) => ListAllRecordScreen(),
+        );
+      }, settings: settings);
     case RoutesName.addUpdateRecord:
       return _pageBuilder(
         (_) {
@@ -58,7 +76,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           );
         },
         settings: settings,
-        transitionsBuilder: slideFromBottomTransition()
+        transitionsBuilder: slideFromBottomTransition(),
       );
     default:
       return _pageBuilder((_) => SplashScreen(), settings: settings);
@@ -66,8 +84,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
 }
 
 RouteTransitionsBuilder slideFromBottomTransition() {
-  return (BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation, Widget child) {
+  return (
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
     return SlideTransition(
       position: Tween<Offset>(
         begin: const Offset(0, 1),

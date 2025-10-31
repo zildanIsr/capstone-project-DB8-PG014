@@ -5,6 +5,7 @@ import 'package:finmene/providers/main/main_provider.dart';
 import 'package:finmene/providers/theme_provider.dart';
 import 'package:finmene/providers/user/user_provider.dart';
 import 'package:finmene/services/firebase_auth_service.dart';
+import 'package:finmene/services/ml_model_service.dart';
 import 'package:finmene/services/navigation_service.dart';
 import 'package:finmene/services/shared_pref_service.dart';
 import 'package:finmene/utils/router/app_routes.dart';
@@ -26,6 +27,7 @@ void main() async {
         Provider(create: (_) => NavigationService()),
         Provider(create: (_) => SharedPrefService()),
         Provider(create: (_) => FirebaseAuth.instance),
+        Provider(create: (_) => MonthlyBudgetModel()),
         Provider(create: (ctx) => FirebaseAuthService(ctx.read())),
         ChangeNotifierProvider(create: (_) => MainProvider()),
         ChangeNotifierProvider(

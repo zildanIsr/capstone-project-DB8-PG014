@@ -85,7 +85,7 @@ class CardInformation extends StatelessWidget {
             ),
             Gap(10),
             Text(
-              "Rp. $total",
+              "Rp.\n$total",
               style: context.textTheme.headlineMedium!.copyWith(
                 color: type == TypeOfRecord.expense ? AppColors.errorHeavy : AppColors.primary,
                 fontWeight: FontWeight.w600

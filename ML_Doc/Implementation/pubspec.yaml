@@ -1,9 +1,9 @@
-dependencies:
-  flutter:
-    sdk: flutter
-  tflite_flutter: ^0.10.4
-  intl: ^0.19.0
+# dependencies:
+#   flutter:
+#     sdk: flutter
+#   tflite_flutter: ^0.10.4
+#   intl: ^0.19.0
 
-flutter:
-  assets:
-    - assets/models/monthly_tf.tflite
+# flutter:
+#   assets:
+#     - assets/models/monthly_tf.tflite

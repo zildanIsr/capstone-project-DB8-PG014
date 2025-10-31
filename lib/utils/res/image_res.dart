@@ -6,4 +6,5 @@ class ImageRes {
   // images
   static const logoNoBg = '$_baseImages/logo-no-bg.png';
   static const logoPrimaryBg = '$_baseImages/logo-primary-bg.png';
+  static const imagePerson = '$_baseImages/person_image.png';
 }

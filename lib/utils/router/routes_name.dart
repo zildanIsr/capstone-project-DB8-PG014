@@ -10,6 +10,9 @@ class RoutesName {
 
   // Home routes
   static const String homepage = '/main/home';
+
+  // Financial Record routes
   static const String addUpdateRecord = '/record/addorUpdate';
+  static const String listAllRecords = '/record/listAll';
 
 }

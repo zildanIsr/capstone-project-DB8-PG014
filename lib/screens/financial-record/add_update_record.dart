@@ -24,8 +24,7 @@ class AddUpdateRecord extends StatefulWidget {
 }
 
 class _AddUpdateRecordState extends State<AddUpdateRecord> {
-  late TextEditingController dateController;
-  late TextEditingController timeController;
+  late TextEditingController dateTimeController;
   late TextEditingController ammountController;
   late TextEditingController descriptionController;
   DateTime selectedDate = DateTime.now();
@@ -57,19 +56,15 @@ class _AddUpdateRecordState extends State<AddUpdateRecord> {
 
   @override
   void initState() {
-    dateController = TextEditingController();
-    timeController = TextEditingController();
+    dateTimeController = TextEditingController();
     ammountController = TextEditingController();
     descriptionController = TextEditingController();
-    timeController.text =
-        '${selectedDate.day}-${selectedDate.month}-${selectedDate.year} Pukul ${selectedDate.hour}:${selectedDate.minute}';
     super.initState();
   }
 
   @override
   void dispose() {
-    dateController.dispose();
-    timeController.dispose();
+    dateTimeController.dispose();
     ammountController.dispose();
     descriptionController.dispose();
     super.dispose();
@@ -116,24 +111,24 @@ class _AddUpdateRecordState extends State<AddUpdateRecord> {
 
         setState(() {
           selectedDate = selectedDateTime;
-          dateController.text = formattedDate;
+          dateTimeController.text = formattedDate;
           isDateTimeValid =
-              dateController.text.isNotEmpty && timeController.text.isNotEmpty;
+              dateTimeController.text.isNotEmpty;
         });
       }
     }
   }
 
   void clearForm() {
-    dateController.clear();
-    timeController.clear();
-    ammountController.clear();
-    descriptionController.clear();
     setState(() {
+      dateTimeController.clear();
+      ammountController.clear();
+      descriptionController.clear();
+      selectedDate = DateTime.now();
+      _selectedCategory = null;
       isDateTimeValid = false;
       isAmmountValid = false;
       isCategoryValid = false;
-      _selectedCategory = null;
     });
   }
 
@@ -152,12 +147,20 @@ class _AddUpdateRecordState extends State<AddUpdateRecord> {
                 Navigator.pop(context);
               }
               clearForm();
-              Utilities.showSnackbar(context, SnackbarEnum.success, "Berhasil menambahkan pencatatan");
+              Utilities.showSnackbar(
+                context,
+                SnackbarEnum.success,
+                "Berhasil menambahkan pencatatan",
+              );
             } else if (stateAdd.isError) {
               if (Navigator.canPop(context)) {
                 Navigator.pop(context);
               }
-              Utilities.showSnackbar(context, SnackbarEnum.success, "Gagal menambahkan pencatatan");
+              Utilities.showSnackbar(
+                context,
+                SnackbarEnum.success,
+                "Gagal menambahkan pencatatan",
+              );
             }
           },
           child: Padding(
@@ -176,7 +179,7 @@ class _AddUpdateRecordState extends State<AddUpdateRecord> {
     return Column(
       children: [
         RegularTextFormField(
-          controller: dateController,
+          controller: dateTimeController,
           label: "Pilih Tanggal",
           keyboardType: TextInputType.none,
           inputAction: TextInputAction.next,
@@ -210,7 +213,7 @@ class _AddUpdateRecordState extends State<AddUpdateRecord> {
         RegularTextFormField(
           controller: ammountController,
           label: "Jumlah",
-          prefix: Text("Rp. ", style: context.textTheme.bodyMedium,),
+          prefix: Text("Rp. ", style: context.textTheme.bodyMedium),
           keyboardType: TextInputType.number,
           inputAction: TextInputAction.next,
           inputFormatter: [

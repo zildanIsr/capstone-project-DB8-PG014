@@ -55,7 +55,7 @@ class FirabaseAuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future signOutUser() async {
+  Future<void> signOutUser() async {
     try {
       _authStatus = FirebaseAuthStatus.signingOut;
       notifyListeners();

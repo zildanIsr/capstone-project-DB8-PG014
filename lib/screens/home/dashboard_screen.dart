@@ -5,6 +5,7 @@ import 'package:finmene/utils/extensions/context_extensions.dart';
 import 'package:finmene/utils/extensions/num_extensions.dart';
 import 'package:finmene/utils/res/image_res.dart';
 import 'package:finmene/utils/res/string_res.dart';
+import 'package:finmene/utils/router/routes_name.dart';
 import 'package:finmene/utils/theme/app_colors.dart';
 import 'package:finmene/utils/utilities.dart';
 import 'package:finmene/utils/widgets/menu_with_more_btn.dart';
@@ -110,18 +111,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Widget _cardInformation() {
+    BookkeepingProvider provider = Provider.of<BookkeepingProvider>(context, listen: true);
     return Row(
       children: [
         Expanded(
           child: CardInformation.income(
-            total: "1.000.000",
-            lastTransaction: "150.000",
+            total: provider.incomeTotal.rupiah,
+            lastTransaction: provider.lastIncomeTrx?.rupiah ?? '0',
           ),
         ),
         Expanded(
           child: CardInformation.expense(
-            total: "2.500.000",
-            lastTransaction: "200.000",
+            total: provider.expenseTotal.rupiah,
+            lastTransaction: provider.lastExpenseTrx?.rupiah ?? '0',
           ),
         ),
       ],
@@ -132,7 +134,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: [
-        MenuWithMoreBtn(title: StringRes.lastRecordTitle, onTap: () {}),
+        MenuWithMoreBtn(title: StringRes.lastRecordTitle, onTap: () {
+          Navigator.pushNamed(context, RoutesName.listAllRecords);
+        }),
         Consumer<BookkeepingProvider>(
           builder: (context, state, _) {
             var stateProvider = state.reportsState.state;
@@ -158,7 +162,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   return Card(
                     child: ListTile(
                       leading: CircleAvatar(
-                        child: Icon(Icons.fastfood_rounded),
+                        child: Icon(val.category.icon),
                       ),
                       title: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

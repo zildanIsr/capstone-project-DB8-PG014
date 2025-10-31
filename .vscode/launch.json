@@ -8,7 +8,10 @@
         {
             "name": "finmene",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "args": [
+                "--verbose"
+            ]
         },
         {
             "name": "finmene (profile mode)",

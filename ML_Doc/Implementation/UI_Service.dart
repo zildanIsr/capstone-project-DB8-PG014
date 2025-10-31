@@ -1,3 +1,4 @@
+/*
 final model = MonthlyBudgetModel();
 await model.load();
 
@@ -17,3 +18,4 @@ final payload = await model.buildPayload(
 // 4) Tampilkan ke UI
 print(payload['next_month_budget_weekly_formatted']);
 print(payload['recommendations']);
+*/
