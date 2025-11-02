@@ -48,9 +48,9 @@ class AppTheme {
 
   static AppBarTheme get _appBarTheme {
     return AppBarTheme(
-      toolbarTextStyle: ThemeMode.system == ThemeMode.light
-          ? _textLightTheme.titleLarge
-          : _textDarkTheme.titleLarge,
+      titleTextStyle: ThemeMode.system == ThemeMode.light
+          ? _textLightTheme.titleMedium
+          : _textDarkTheme.titleMedium,
     );
   }
 

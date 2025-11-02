@@ -4,15 +4,17 @@ import 'package:finmene/utils/extensions/num_extensions.dart';
 import 'package:flutter/material.dart';
 
 class RecordCard extends StatelessWidget {
-  const RecordCard({super.key, required this.record});
+  const RecordCard({super.key, required this.record, this.onTap});
 
   final Report record;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
         leading: CircleAvatar(child: Icon(record.category.icon)),
+        onTap: onTap,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -23,7 +25,16 @@ class RecordCard extends StatelessWidget {
             ),
           ],
         ),
-        subtitle: Text("Rp. ${record.ammount.rupiah}"),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text("Rp. ${record.ammount.rupiah}"),
+            record.description != ""
+                ? Text(record.description!, softWrap: true)
+                : SizedBox.shrink(),
+          ],
+        ),
       ),
     );
   }

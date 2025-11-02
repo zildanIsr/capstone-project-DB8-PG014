@@ -16,8 +16,22 @@ import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+class AddUpdateArgument {
+  final bool isEditForm;
+  final Report report;
+  final int index;
+
+  AddUpdateArgument({
+    this.isEditForm = false,
+    required this.report,
+    required this.index,
+  });
+}
+
 class AddUpdateRecord extends StatefulWidget {
-  const AddUpdateRecord({super.key});
+  const AddUpdateRecord({super.key, this.argument});
+
+  final AddUpdateArgument? argument;
 
   @override
   State<AddUpdateRecord> createState() => _AddUpdateRecordState();
@@ -59,6 +73,17 @@ class _AddUpdateRecordState extends State<AddUpdateRecord> {
     dateTimeController = TextEditingController();
     ammountController = TextEditingController();
     descriptionController = TextEditingController();
+    if (widget.argument != null && widget.argument!.isEditForm) {
+      dateTimeController.text = DateFormat(
+        'dd-MM-yyyy HH:mm',
+      ).format(widget.argument!.report.trxDate);
+      ammountController.text = widget.argument!.report.ammount.toString();
+      descriptionController.text = widget.argument!.report.description ?? "";
+      _selectedCategory = widget.argument!.report.category;
+      isDateTimeValid = true;
+      isAmmountValid = true;
+      isCategoryValid = true;
+    }
     super.initState();
   }
 
@@ -112,8 +137,7 @@ class _AddUpdateRecordState extends State<AddUpdateRecord> {
         setState(() {
           selectedDate = selectedDateTime;
           dateTimeController.text = formattedDate;
-          isDateTimeValid =
-              dateTimeController.text.isNotEmpty;
+          isDateTimeValid = dateTimeController.text.isNotEmpty;
         });
       }
     }
@@ -135,7 +159,9 @@ class _AddUpdateRecordState extends State<AddUpdateRecord> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Tambah Pencatatan")),
+      appBar: AppBar(
+        title: Text(widget.argument != null && widget.argument!.isEditForm ? "Edit Pencatatan" : "Tambah Pencatatan")
+      ),
       body: SingleChildScrollView(
         child: ProviderListenerWidget<BookkeepingProvider>(
           listener: (context, value) {
@@ -150,7 +176,7 @@ class _AddUpdateRecordState extends State<AddUpdateRecord> {
               Utilities.showSnackbar(
                 context,
                 SnackbarEnum.success,
-                "Berhasil menambahkan pencatatan",
+                widget.argument != null && widget.argument!.isEditForm ? "Berhasil melakukan perubahan" : "Berhasil menambahkan pencatatan",
               );
             } else if (stateAdd.isError) {
               if (Navigator.canPop(context)) {
@@ -159,7 +185,7 @@ class _AddUpdateRecordState extends State<AddUpdateRecord> {
               Utilities.showSnackbar(
                 context,
                 SnackbarEnum.success,
-                "Gagal menambahkan pencatatan",
+                widget.argument != null && widget.argument!.isEditForm ? "Gagal melakukan perubahan" : "Gagal menambahkan pencatatan",
               );
             }
           },
@@ -245,7 +271,7 @@ class _AddUpdateRecordState extends State<AddUpdateRecord> {
   }
 
   Widget _buttonLogin() => ButtonPrimary(
-    title: StringRes.addButton,
+    title: widget.argument != null && widget.argument!.isEditForm ? "Edit Pencatatan" : StringRes.addButton,
     onPressed: _validateAndSave()
         ? () {
             Report report = Report(
@@ -254,7 +280,11 @@ class _AddUpdateRecordState extends State<AddUpdateRecord> {
               ammount: currenyFormatter.getConvertToDouble(),
               description: descriptionController.text,
             );
-            context.read<BookkeepingProvider>().addNewReport(report);
+            if (widget.argument != null && widget.argument!.isEditForm) {
+              context.read<BookkeepingProvider>().editReport(report, widget.argument!.index);
+            } else {
+              context.read<BookkeepingProvider>().addNewReport(report);
+            }
           }
         : null,
   );

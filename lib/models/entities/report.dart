@@ -10,7 +10,7 @@ class Report extends Equatable {
   const Report({required this.trxDate, required this.ammount, required this.category, required this.description});
 
   factory Report.empty() {
-    return Report(trxDate: DateTime.timestamp(), ammount: 12000, category: CategoryType.foodnDrink, description: "description");
+    return Report(trxDate: DateTime.timestamp(), ammount: 12000, category: CategoryType.foodnDrink, description: null);
   }
   
   @override

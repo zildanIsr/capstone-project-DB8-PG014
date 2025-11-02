@@ -70,9 +70,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case RoutesName.addUpdateRecord:
       return _pageBuilder(
         (_) {
+          final argument = settings.arguments as AddUpdateArgument?;
           return ChangeNotifierProvider(
             create: (context) => FirabaseAuthProvider(context.read()),
-            builder: (_, __) => AddUpdateRecord(),
+            builder: (_, __) => AddUpdateRecord(
+              argument: argument,
+            ),
           );
         },
         settings: settings,

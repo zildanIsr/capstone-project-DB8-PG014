@@ -2,12 +2,14 @@ import 'package:finmene/models/entities/recommendation.dart';
 import 'package:finmene/models/entities/report.dart';
 import 'package:finmene/providers/bookkeeping/bookkeeping_provider.dart';
 import 'package:finmene/providers/ml/monthly_budget_provider.dart';
+import 'package:finmene/screens/financial-record/add_update_record.dart';
 import 'package:finmene/utils/enums/snackbar_enum.dart';
 import 'package:finmene/utils/enums/status_state_enum.dart';
 import 'package:finmene/utils/extensions/context_extensions.dart';
-import 'package:finmene/utils/extensions/num_extensions.dart';
+import 'package:finmene/utils/router/routes_name.dart';
 import 'package:finmene/utils/utilities.dart';
 import 'package:finmene/utils/views/provider_listener.dart';
+import 'package:finmene/utils/widgets/cards/record_card.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
@@ -65,21 +67,11 @@ class _ListAllRecordScreenState extends State<ListAllRecordScreen> {
                   padding: EdgeInsets.only(top: 16),
                   itemBuilder: (_, index) {
                     Report val = state.reports[index];
-                    return Card(
-                      child: ListTile(
-                        leading: CircleAvatar(child: Icon(val.category.icon)),
-                        title: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(val.category.labelName),
-                            Text(
-                              '${val.trxDate.day}-${val.trxDate.month}-${val.trxDate.year}',
-                              style: context.textTheme.bodySmall,
-                            ),
-                          ],
-                        ),
-                        subtitle: Text("Rp. ${val.ammount.rupiah}"),
-                      ),
+                    return RecordCard(
+                      record: val,
+                      onTap: () {
+                        Navigator.pushNamed(context, RoutesName.addUpdateRecord, arguments: AddUpdateArgument(report: val, index: index, isEditForm: true));
+                      },
                     );
                   },
                 );
